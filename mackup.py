@@ -210,6 +210,9 @@ SUPPORTED_APPS = {
     'SizeUp': [PREFERENCES + 'com.irradiatedsoftware.SizeUp.plist',
                APP_SUPPORT + 'SizeUp/SizeUp.sizeuplicense'],
 
+    'Skype': [PREFERENCES + 'com.skype.skype.plist',
+              APP_SUPPORT + 'Skype'],
+
     'Slate': ['.slate',
               APP_SUPPORT + 'com.slate.Slate'],
 
