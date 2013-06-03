@@ -244,6 +244,9 @@ SUPPORTED_APPS = {
 
     'Tmuxinator': ['.tmuxinator'],
 
+    'TotalTerminal': [PREFERENCES + 'com.binaryage.totalterminal.crashwatcher.plist',
+                      PREFERENCES + 'com.binaryage.totalterminal.plist'],
+
     'Transmission': [PREFERENCES + 'org.m0k.transmission.plist'],
 
     'Transmit': [PREFERENCES + 'com.panic.Transmit.plist',
