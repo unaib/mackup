@@ -139,6 +139,7 @@ That's it, you got your `git` config setup on your new Mac.
 
 ## Supported Applications
 
+  - [ABBY FineReader for ScanSnap](http://www.abbyy.com/support/FRScanSnap/)
   - [Adium](http://adium.im/)
   - [AppCode 2](http://www.jetbrains.com/objc/)
   - [Bash](http://www.gnu.org/software/bash/)
@@ -146,6 +147,7 @@ That's it, you got your `git` config setup on your new Mac.
   - [BetterTouchTool](http://blog.boastr.net/)
   - [Boto](https://github.com/boto/boto)
   - [Byobu](http://byobu.co/)
+  - [Cardiris for ScanSnap](http://www.irislink.com/c2-2329-189/Cardiris--for-ScanSnap.aspx)
   - [Coda 2](http://panic.com/coda/)
   - [ControlPlane](http://www.controlplaneapp.com/)
   - [CoRD](http://cord.sourceforge.net/)
@@ -182,6 +184,7 @@ That's it, you got your `git` config setup on your new Mac.
   - [Ruby](http://ruby-lang.org/)
   - [RubyMine 4](http://www.jetbrains.com/ruby/)
   - [S3cmd](http://s3tools.org/s3cmd)
+  - [ScanSnap Manager V3.2](http://www.fujitsu.com/global/support/computing/peripheral/scanners/software/s1500.html)
   - [Screen](http://www.gnu.org/software/screen/)
   - [Sequel Pro](http://www.sequelpro.com/)
   - [SHSH Blobs](http://en.wikipedia.org/wiki/SHSH_blob)

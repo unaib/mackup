@@ -55,6 +55,8 @@ APP_SUPPORT = 'Library/Application Support/'
 # Application Name: List of files (relative path from the user's home)
 
 SUPPORTED_APPS = {
+    'ABBY FineReader for ScanSnap': [PREFERENCES + 'com.abbyy.FineReaderForScanSnap.plist'],
+
     'Adium': [APP_SUPPORT + 'Adium 2.0',
               PREFERENCES + 'com.adiumX.adiumX.plist'],
 
@@ -82,6 +84,8 @@ SUPPORTED_APPS = {
               '.byoburc',
               '.byoburc.tmux',
               '.byoburc.screen'],
+
+    'Cardiris for ScanSnap': [PREFERENCES + 'Cardiris Prefs'],
 
     'ControlPlane': [PREFERENCES + 'com.dustinrue.ControlPlane.plist'],
 
@@ -179,6 +183,19 @@ SUPPORTED_APPS = {
                     '.pentadactylrc'],
 
     'S3cmd': ['.s3cfg'],
+
+    'ScanSnap Manager V3.2': [PREFERENCES + 'jp.co.pfu.ScanSnap.P2IUNISET.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.QMScanToPrint.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2Folder.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2FolderSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2GDocSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2MailSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2MobileSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.Scan2PrintSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.ScanToDropboxSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.ScanToFolder.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.ScanToSalesforceSetting.plist',
+                              PREFERENCES + 'jp.co.pfu.ScanSnap.V10L10.plist'],
 
     'Screen': ['.screenrc'],
 
