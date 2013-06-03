@@ -126,6 +126,8 @@ SUPPORTED_APPS = {
 
     'iTerm2': [PREFERENCES + 'com.googlecode.iterm2.plist'],
 
+    'iWork Templates': [APP_SUPPORT + "iWork"],
+
     'Keymo': [PREFERENCES + 'com.manytricks.Keymo.plist'],
 
     'KeyRemap4MacBook': [
