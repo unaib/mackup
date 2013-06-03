@@ -237,6 +237,8 @@ SUPPORTED_APPS = {
 
     'Teamocil': ['.teamocil'],
 
+    'Terminal': [PREFERENCES + 'com.apple.Terminal.plist'],
+
     'TextMate': [APP_SUPPORT + 'TextMate',
                  PREFERENCES + 'com.macromates.textmate.plist',
                  PREFERENCES + 'com.macromates.textmate.webpreview.plist'],
