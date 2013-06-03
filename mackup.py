@@ -246,6 +246,10 @@ SUPPORTED_APPS = {
 
     'Transmission': [PREFERENCES + 'org.m0k.transmission.plist'],
 
+    'VelaClock': [PREFERENCES + 'widget-com.veladg.widget.velaclockdeluxe.plist',
+                  APP_SUPPORT + 'VelaClock',
+                  APP_SUPPORT + 'Vela Design Group'],
+
     'Ventrilo': [PREFERENCES + 'Ventrilo'],
 
     'Vim': ['.gvimrc',
