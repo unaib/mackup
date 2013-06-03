@@ -97,7 +97,9 @@ SUPPORTED_APPS = {
     'Emacs': ['.emacs',
               '.emacs.d'],
 
-    'ExpanDrive': [APP_SUPPORT + 'ExpanDrive'],
+    'ExpanDrive': [PREFERENCES + 'com.expandrive.ExpanDrive2.plist',
+                   PREFERENCES + 'com.expandrive.ExpanDrive3.plist',
+                   APP_SUPPORT + 'ExpanDrive'],
 
     'Fish': ['.config/fish'],
 
