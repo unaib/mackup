@@ -246,6 +246,11 @@ SUPPORTED_APPS = {
 
     'Transmission': [PREFERENCES + 'org.m0k.transmission.plist'],
 
+    'Transmit': [PREFERENCES + 'com.panic.Transmit.plist',
+                 PREFERENCES + 'com.panic.TransmitDisk.plist',
+                 APP_SUPPORT + 'Transmit/Favorite Icons',
+                 APP_SUPPORT + 'Transmit/Favorites'],
+
     'VelaClock': [PREFERENCES + 'widget-com.veladg.widget.velaclockdeluxe.plist',
                   APP_SUPPORT + 'VelaClock',
                   APP_SUPPORT + 'Vela Design Group'],
