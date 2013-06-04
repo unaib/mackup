@@ -805,7 +805,7 @@ def get_ignored_apps():
 
     return set(ignored_apps)
 
-def get_config_path_and_append_to_backup(section, optionName):
+def get_config_path_and_append_to_backup(section, optionName, mackup):
     """
     Looks in the config for the specified option in the specified section.  If it is there,
     it reads the value and parses it as a path.  If the path is valid, it appends the path
@@ -814,6 +814,7 @@ def get_config_path_and_append_to_backup(section, optionName):
     Args:
         section(str): The section in the config file
         optionName(str): The option name to look for
+        mackup(Mackup): the instance that is running
 
     Returns:
         The path if it is valid and exists, the empty string otherwise.
@@ -821,30 +822,34 @@ def get_config_path_and_append_to_backup(section, optionName):
     # If a config file exists, grab it and parser it
     config = configparser.SafeConfigParser(allow_no_value=True)
 
-    # Is the config file there ?
-    if config.read(os.environ['HOME'] + '/.mackup.cfg'):
+    # Is the config file there (be sure to check the backup dir since it may not have been copied yet) ?
+    if config.read(os.environ['HOME'] + '/.mackup.cfg') or config.read(mackup.dropbox_folder + '/.mackup.cfg'):
         # Is the section/option pair in the cfg file ?
         if config.has_option(section,optionName):
             path = os.path.expanduser( config.get(section,optionName))
-            # Is the specified path valid ?
-            if os.path.exists(path):
-                SUPPORTED_APPS['Mackup'].append(os.path.relpath(path, os.environ['HOME']))
+            relPath = os.path.relpath(path, os.environ['HOME'])
+            # Is the specified path valid (either on the real system or in the backup) ?
+            if os.path.exists(path) or os.path.exists(mackup.dropbox_folder + '/' + relPath):
+                SUPPORTED_APPS['Mackup'].append(relPath)
                 return path;
 
     return "";
 
 
 
-def get_custom_apps():
+def get_custom_apps(mackup):
     """
     Get the list of custom applications referenced in the config file and
     reads it in as a dictionary.
+
+    Args:
+        mackup(Mackup) the instance that is running
 
     Returns:
         (dictionary) Applications / files to backup or an empy dictionary
         if the user didn't specify any custom applications
     """
-    path = get_config_path_and_append_to_backup('Custom Applications', 'dictionaryFile')
+    path = get_config_path_and_append_to_backup('Custom Applications', 'dictionaryFile', mackup)
     if path:
         json_data=open(path).read()
         return json.loads(json_data)
@@ -885,13 +890,16 @@ def is_process_running(process_name):
 
     return bool(returncode == 0)
 
-def update_supported_apps():
+def update_supported_apps(mackup):
     """
     Get the list of custom apps that the user has specified 
     (if any) and append it to the SUPPORTED_APPS list, replacing 
     any that are duplicated.
+
+    Args:
+        mackup(Mackup) the instance that is running.
     """
-    SUPPORTED_APPS.update(get_custom_apps())
+    SUPPORTED_APPS.update(get_custom_apps(mackup))
 
 
 ################
@@ -902,12 +910,12 @@ def update_supported_apps():
 def main():
     """Main function"""
 
-    update_supported_apps()
+    mackup = Mackup()
+
+    update_supported_apps(mackup)
 
     # Get the command line arg
     args = parse_cmdline_args()
-
-    mackup = Mackup()
 
     if args.mode == BACKUP_MODE:
         # Check the env where the command is being run
