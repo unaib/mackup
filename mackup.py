@@ -267,6 +267,7 @@ SUPPORTED_APPS = {
                  APP_SUPPORT + 'Transmit/Favorites'],
 
     'VelaClock': [PREFERENCES + 'widget-com.veladg.widget.velaclockdeluxe.plist',
+                  PREFERENCES + 'com.veladg.vcDeluxeReg.plist',
                   APP_SUPPORT + 'VelaClock',
                   APP_SUPPORT + 'Vela Design Group'],
 
