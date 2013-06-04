@@ -841,7 +841,8 @@ def get_custom_apps():
         (dictionary) Applications / files to backup or an empy dictionary
         if the user didn't specify any custom applications
     """
-    if get_config_path_and_append_to_backup('Custom Applications', 'dictionaryFile'):
+    path = get_config_path_and_append_to_backup('Custom Applications', 'dictionaryFile')
+    if path:
         json_data=open(path).read()
         return json.loads(json_data)
 
