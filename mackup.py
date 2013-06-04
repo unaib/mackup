@@ -823,15 +823,18 @@ def get_config_path_and_append_to_backup(section, optionName, mackup):
     config = configparser.SafeConfigParser(allow_no_value=True)
 
     # Is the config file there (be sure to check the backup dir since it may not have been copied yet) ?
-    if config.read(os.environ['HOME'] + '/.mackup.cfg') or config.read(mackup.dropbox_folder + '/.mackup.cfg'):
+    if config.read(os.environ['HOME'] + '/.mackup.cfg') or config.read(mackup.mackup_folder + '/.mackup.cfg'):
         # Is the section/option pair in the cfg file ?
         if config.has_option(section,optionName):
             path = os.path.expanduser( config.get(section,optionName))
             relPath = os.path.relpath(path, os.environ['HOME'])
             # Is the specified path valid (either on the real system or in the backup) ?
-            if os.path.exists(path) or os.path.exists(mackup.dropbox_folder + '/' + relPath):
+            if os.path.exists(path): 
                 SUPPORTED_APPS['Mackup'].append(relPath)
                 return path;
+            elif os.path.exists(mackup.mackup_folder + '/' + relPath):
+                SUPPORTED_APPS['Mackup'].append(relPath)
+                return mackup.mackup_folder + '/' + relPath
 
     return "";
 
@@ -929,6 +932,10 @@ def main():
     elif args.mode == RESTORE_MODE:
         # Check the env where the command is being run
         mackup.check_for_usable_restore_env()
+
+        # Restore 'Mackup' first to get the configs in place
+        app = ApplicationProfile(mackup, SUPPORTED_APPS['Mackup'])
+        app.restore()
 
         for app_name in SUPPORTED_APPS:
             app = ApplicationProfile(mackup, SUPPORTED_APPS[app_name])
