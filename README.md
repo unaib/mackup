@@ -208,6 +208,7 @@ That's it, you got your `git` config setup on your new Mac.
   - [Transmission](http://www.transmissionbt.com/)
   - [Transmit](http://panic.com/transmit/)
   - [VelaClock](http://veladg.com/velaclockwidget.html)
+  - [VelaTerra](http://veladg.com/velaterra.html)
   - [Ventrilo](http://www.ventrilo.com/)
   - [Vim](http://www.vim.org/)
   - [Vimperator](http://www.vimperator.org/vimperator)
