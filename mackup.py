@@ -409,6 +409,10 @@ UNINSTALL_MODE = 'uninstall'
 PLATFORM_DARWIN = 'Darwin'
 PLATFORM_LINUX = 'Linux'
 
+# Cloud providers
+DROPBOX = 'dropbox'
+CLOUDSTATION = 'cloudstation'
+
 
 ###########
 # Classes #
@@ -848,6 +852,8 @@ def parse_cmdline_args():
                               " system you use.\n"
                               "Uninstall will reset everything as it was"
                               " before using Mackup."))
+
+    parser.add_argument("-p","--provider",choices=[DROPBOX, CLOUDSTATION], default=DROPBOX, help="Provider of the cloud services [dropbox, cloudstation]")                          
 
     # Parse the command line and return the parsed options
     return parser.parse_args()
