@@ -33,6 +33,10 @@ import subprocess
 import sys
 import tempfile
 
+
+import sqlite3
+
+
 # Py3k compatible
 try:
     import configparser
@@ -419,6 +423,47 @@ CLOUDSTATION = 'cloudstation'
 ###########
 
 
+# supporting classes for different providers
+
+
+class DropBoxProvider(object):
+    def __init__(self):
+        self.host_db_path = os.environ['HOME'] + '/.dropbox/host.db'
+        if not self.viable():
+            raise Exception("DropBox config file doesn't exist")
+    
+    def get_cloud_folder_path(self):
+        with open(self.host_db_path, 'r') as f:
+                data = f.read().split()
+        dropbox_home = base64.b64decode(data[1])
+        return dropbox_home
+  
+    def viable(self):
+        return os.path.exists(self.host_db_path)
+        
+    
+    
+class CloudStationProvider(object):
+    def __init__(self):
+        self.host_db_path = os.environ['HOME'] + '/.Cloudstation/db/sys.sqlite' 
+        if not self.viable():
+            raise Exception("CloudStation config file doesn't exist")
+        
+    def get_cloud_folder_path(self):
+        con = sqlite3.connect(self.host_db_path)
+        cur = con.cursor()
+        cur.execute('select sync_folder from session_table limit 1')
+        data = cur.fetchone()
+        cloudstation_home = data[0]
+        return cloudstation_home
+
+    def viable(self):
+        return os.path.exists(self.host_db_path)
+
+
+
+
+
 class ApplicationProfile(object):
     """Instantiate this class with application specific data"""
 
@@ -594,23 +639,44 @@ class ApplicationProfile(object):
 class Mackup(object):
     """Main Mackup class"""
 
-    def __init__(self):
+    def __init__(self, args):
         """Mackup Constructor"""
+        self.args = args
+        self.cloud_folder = None
+        self.pick_cloud_provider()
+        
         try:
-            self.dropbox_folder = get_dropbox_folder_location()
+            self.cloud_folder = self.cloud_provider.get_cloud_folder_path()
         except IOError:
             error(("Unable to find the Dropbox folder."
                    " If Dropbox is not installed and running, go for it on"
                    " <http://www.dropbox.com/>"))
 
-        self.mackup_folder = os.path.join(self.dropbox_folder, MACKUP_DB_PATH)
+        self.mackup_folder = os.path.join(self.cloud_folder, MACKUP_DB_PATH)
         self.temp_folder = tempfile.mkdtemp(prefix="mackup_tmp_")
-
+    
+    def pick_cloud_provider(self):
+        if self.args.provider == DROPBOX:
+            self.cloud_provider = DropBoxProvider()
+        elif self.args.provider == CLOUDSTATION:
+            self.cloud_provider = CloudStationProvider()
+    
+    def pick_cloud_folder(self):
+        """docstring for pick_cloud_folder"""
+        if self.args.provider == DROPBOX:
+            host_db_path = os.environ['HOME'] + '/.dropbox/host.db'
+            with open(host_db_path, 'r') as f:
+                data = f.read().split()
+            dropbox_home = base64.b64decode(data[1])
+        elif self.args.provider == CLOUDSTATION:
+            pass
+        return dropbox_home
+            
     def _check_for_usable_environment(self):
         """Check if the current env is usable and has everything's required"""
 
         # Do we have a home folder ?
-        if not os.path.isdir(self.dropbox_folder):
+        if not os.path.isdir(self.cloud_folder):
             error(("Unable to find the Dropbox folder."
                    " If Dropbox is not installed and running, go for it on"
                    " <http://www.dropbox.com/>"))
@@ -859,19 +925,18 @@ def parse_cmdline_args():
     return parser.parse_args()
 
 
-def get_dropbox_folder_location():
-    """
-    Try to locate the Dropbox folder
-
-    Returns:
-        (str) Full path to the current Dropbox folder
-    """
-    host_db_path = os.environ['HOME'] + '/.dropbox/host.db'
-    with open(host_db_path, 'r') as f:
-        data = f.read().split()
-    dropbox_home = base64.b64decode(data[1])
-
-    return dropbox_home
+# def get_dropbox_folder_location():
+#     """
+#     Try to locate the Dropbox folder
+# 
+#     Returns:
+#         (str) Full path to the current Dropbox folder
+#     """
+#     host_db_path = os.environ['HOME'] + '/.dropbox/host.db'
+#     with open(host_db_path, 'r') as f:
+#         data = f.read().split()
+#     dropbox_home = base64.b64decode(data[1])
+#     return dropbox_home
 
 
 def get_ignored_apps():
@@ -1045,7 +1110,7 @@ def main():
     # Get the command line arg
     args = parse_cmdline_args()
 
-    mackup = Mackup()
+    mackup = Mackup(args)
 
     if args.mode == BACKUP_MODE:
         # Check the env where the command is being run
