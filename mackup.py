@@ -666,7 +666,7 @@ class Mackup(object):
         self.pick_cloud_provider()
         
         try:
-            self.cloud_folder = self.cloud_provider.get_cloud_folder_path()
+            self.cloud_folder = str(self.cloud_provider.get_cloud_folder_path())
         except IOError:
             error(("Unable to find the Dropbox folder."
                    " If Dropbox is not installed and running, go for it on"
