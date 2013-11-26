@@ -1,7 +1,21 @@
 # Mackup Changelog
 
 ## WIP
+
+- Added support for Arara and Aspell (thx @twsh)
+- Removed support of OS X Services, as it does not support links
+
+## Mackup 0.5.3
+
 - Added support for Divvy (thx @saulshanabrook)
+- Added support for Apple Messages (thx @pzbyszynski)
+- Added support for Skype (thx @pzbyszynski)
+- Added support for SuperDuper! (thx @pzbyszynski)
+- Added support for ForkLift 2 (thx @pzbyszynski)
+- Added support for Ember (thx @pzbyszynski)
+- Added support for Dash and Cyberduck (thx @suprememoocow)
+- Added support for Mou (thx @jannae)
+- Added support for PokerStars (thx @vitorgalvao)
 
 ## Mackup 0.5.2
 

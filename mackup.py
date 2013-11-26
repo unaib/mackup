@@ -85,6 +85,13 @@ SUPPORTED_APPS = {
     'AppCode 2': [APP_SUPPORT + 'appCode20',
                   PREFERENCES + 'appCode20'],
 
+    'Arara': ['.araraconfig.yaml',
+        	  'araraconfig.yaml'],
+
+    'Aspell': ['.aspell.conf',
+        	   '.aspell.en.prepl',
+        	   '.aspell.en.pws'],
+
     'Bartender': [PREFERENCES + 'com.surteesstudios.Bartender.plist'],
 
     'Bash': ['.bash_aliases',
@@ -137,13 +144,22 @@ SUPPORTED_APPS = {
                PREFERENCES + 'com.panic.Coda2.plist'],
 
     'Curl': ['.netrc'],
-    
+
+    'Cyberduck': [APP_SUPPORT + 'Cyberduck',
+                  PREFERENCES + 'ch.sudo.cyberduck.plist'],
+
+    'Dash': [APP_SUPPORT + 'Dash/DocSets',
+             APP_SUPPORT + 'Dash/library.dash',
+             PREFERENCES + 'com.kapeli.dash.plist'],
+
     'Divvy': [PREFERENCES + 'com.mizage.direct.Divvy.plist'],
 
     'Droplr': [PREFERENCES + 'com.droplr.droplr-mac.plist'],
 
     'Emacs': ['.emacs',
               '.emacs.d'],
+
+    'Ember': ['Library/Group Containers/P97H7FTHWN.com.realmacsoftware.ember'],
 
     'Exercism': ['.exercism'],
 
@@ -154,6 +170,8 @@ SUPPORTED_APPS = {
     'Fish': ['.config/fish'],
 
     'Flux': [PREFERENCES + 'org.herf.Flux.plist'],
+
+    'ForkLift 2': [PREFERENCES + 'com.binarynights.ForkLift2.plist'],
 
     'GeekTool': [
         PREFERENCES + 'org.tynsoe.GeekTool.plist',
@@ -210,9 +228,16 @@ SUPPORTED_APPS = {
     'Mercurial': ['.hgrc',
                   '.hgignore_global'],
 
+    'Messages': ['Library/Messages'],
+
     'Moom': [
         PREFERENCES + 'com.manytricks.Moom.plist',
         APP_SUPPORT + 'Many Tricks'],
+
+    'Mou': [
+        PREFERENCES + 'com.mouapp.Mou.plist',
+        PREFERENCES + 'com.mouapp.Mou.LSSharedFileList.plist',
+        APP_SUPPORT + 'Mou'],
 
     'MPV': ['.mpv/channels.conf',
             '.mpv/config',
@@ -281,6 +306,9 @@ SUPPORTED_APPS = {
     'Pentadactyl': ['.pentadactyl',
                     '.pentadactylrc'],
 
+    'PokerStars': [PREFERENCES + 'com.pokerstars.user.ini',
+                   PREFERENCES + 'com.pokerstars.PokerStars.plist'],
+
     'S3cmd': ['.s3cfg'],
 
     'Scenario': [PREFERENCES + 'com.lagente.scenario.plist',
@@ -294,8 +322,6 @@ SUPPORTED_APPS = {
 
     'Sequel Pro': [APP_SUPPORT + 'Sequel Pro/Data'],
 
-    'Services': ['Library/Services'],
-
     'SHSH Blobs': ['.shsh'],
 
     'Shuttle': ['.shuttle.json'],
@@ -304,6 +330,8 @@ SUPPORTED_APPS = {
                APP_SUPPORT + 'SizeUp/SizeUp.sizeuplicense'],
 
     'Skim': [PREFERENCES + 'net.sourceforge.skim-app.skim.plist'],
+
+    'Skype': [APP_SUPPORT + 'Skype'],
 
     'Slate': ['.slate',
               APP_SUPPORT + 'com.slate.Slate'],
@@ -335,6 +363,8 @@ SUPPORTED_APPS = {
                        APP_SUPPORT + 'Sublime Text 3/Packages'],
 
     'Subversion': ['.subversion'],
+
+    'SuperDuper!': [APP_SUPPORT + 'SuperDuper!'],
 
     'Teamocil': ['.teamocil'],
 
@@ -398,7 +428,7 @@ SUPPORTED_APPS = {
 
 
 # Current version
-VERSION = '0.6.0'
+VERSION = '0.5.3'
 
 # Mode used to backup files to Dropbox
 BACKUP_MODE = 'backup'
