@@ -33,7 +33,7 @@ import subprocess
 import sys
 import tempfile
 
-
+# Needed by the Synology Cloudstation
 import sqlite3
 
 
@@ -398,7 +398,7 @@ SUPPORTED_APPS = {
 
 
 # Current version
-VERSION = '0.5.2'
+VERSION = '0.6.0'
 
 # Mode used to backup files to Dropbox
 BACKUP_MODE = 'backup'
@@ -416,6 +416,7 @@ PLATFORM_LINUX = 'Linux'
 # Cloud providers
 DROPBOX = 'dropbox'
 CLOUDSTATION = 'cloudstation'
+GDRIVE = 'gdrive'
 
 
 ###########
@@ -423,8 +424,7 @@ CLOUDSTATION = 'cloudstation'
 ###########
 
 
-# supporting classes for different providers
-
+# Supporting classes for different cloud providers
 
 class DropBoxProvider(object):
     def __init__(self):
@@ -441,6 +441,26 @@ class DropBoxProvider(object):
     def viable(self):
         return os.path.exists(self.host_db_path)
         
+
+class GDriveProvider(object):
+    def __init__(self):
+        self.host_db_path = APP_SUPPORT + 'Google/Drive/sync_config.db'
+        if not self.viable():
+            raise Exception("GDrive config file doesn't exist")
+    
+    def get_cloud_folder_path(self):
+        con = sqlite3.connect(self.host_db_path)
+        cur = con.cursor()
+        cur.execute("select data_value from data where entry_key = 'local_sync_root_path'")
+        data = cur.fetchone()
+        gdrive_home = data[0]
+        return gdrive_home
+  
+    def viable(self):
+        return os.path.exists(self.host_db_path)
+        
+    
+
     
     
 class CloudStationProvider(object):
@@ -919,7 +939,7 @@ def parse_cmdline_args():
                               "Uninstall will reset everything as it was"
                               " before using Mackup."))
 
-    parser.add_argument("-p","--provider",choices=[DROPBOX, CLOUDSTATION], default=DROPBOX, help="Provider of the cloud services [dropbox, cloudstation]")                          
+    parser.add_argument("-p","--provider",choices=[DROPBOX, CLOUDSTATION, GDRIVE], default=DROPBOX, help="Provider of the cloud services [dropbox, cloudstation, gdrive]")                          
 
     # Parse the command line and return the parsed options
     return parser.parse_args()
